@@ -22,6 +22,11 @@ public class CharactersService {
     }
 
     public Characters getCharacterById(Long id) {
-        return charactersRepository.findById(id).orElse(null);
+        return charactersRepository.findById(id)
+            .orElseThrow(() -> new IllegalArgumentException("Personagem com ID " + id + " não encontrado."));
+    }
+
+    public List<Characters> searchByName(String name) {
+        return charactersRepository.findByNameContainingIgnoreCase(name);
     }
 }

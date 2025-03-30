@@ -1,0 +1,74 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f4f4f9;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+#searchContainer {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+#searchInput {
+    padding: 10px;
+    font-size: 16px;
+    width: 300px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+
+#searchButton {
+    padding: 10px 15px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#searchButton:hover {
+    background-color: #45a049;
+}
+
+#characterList {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+.characterItem {
+    background-color: white;
+    padding: 10px;
+    text-align: center;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.characterItem img {
+    width: 100px; /* Define a largura fixa */
+    height: 100px; /* Define a altura fixa */
+    object-fit: cover; /* Garante que a imagem seja cortada proporcionalmente */
+    border-radius: 50%; /* Mantém o formato circular */
+    border: 2px solid #ccc; /* Adiciona uma borda */
+}
+
+.characterItem p {
+    font-size: 16px;
+    margin-top: 10px;
+    color: #333;
+}
+
+.no-results {
+    text-align: center;
+    color: red;
+    font-size: 18px;
+}
