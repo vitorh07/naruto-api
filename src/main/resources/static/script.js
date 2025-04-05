@@ -1,15 +1,12 @@
 const searchInput = document.getElementById('searchInput');
-const searchButton = document.getElementById('searchButton');
+const filterType = document.getElementById('filterType');
 const characterList = document.getElementById('characterList');
 
-function normalizeFileName(name) {
-    return name.trim().replace(/\s+/g, '_');
-}
-
-function searchCharacters(query) {
+function searchCharacters(query = '', filter = '') {
     const encodedQuery = encodeURIComponent(query);
+    const encodedFilter = encodeURIComponent(filter);
 
-    fetch(`/api/characters/search?name=${encodedQuery}`)
+    fetch(`/api/characters/search?name=${encodedQuery}&filter=${encodedFilter}`)
         .then(response => {
             if (!response.ok) {
                 throw new Error(`Erro na API: ${response.status} - ${response.statusText}`);
@@ -17,7 +14,6 @@ function searchCharacters(query) {
             return response.json();
         })
         .then(data => {
-            console.log('Dados recebidos:', data);
             characterList.innerHTML = '';
 
             if (!data || data.length === 0) {
@@ -29,8 +25,6 @@ function searchCharacters(query) {
             }
 
             data.forEach(character => {
-                console.log('Personagem:', character.name);
-
                 const listItem = document.createElement('div');
                 listItem.classList.add('characterItem');
 
@@ -41,7 +35,6 @@ function searchCharacters(query) {
                 characterImage.alt = character.name || 'Personagem sem nome';
 
                 characterImage.onerror = () => {
-                    console.error(`Erro ao carregar a imagem: imgs/${imageName}`);
                     characterImage.src = 'imgs/placeholder.png';
                 };
 
@@ -54,25 +47,30 @@ function searchCharacters(query) {
             });
         })
         .catch(error => {
-            console.error('Erro ao buscar personagens:', error);
             characterList.innerHTML = '<p class="no-results">Erro ao buscar personagens. Tente novamente mais tarde.</p>';
         });
 }
 
-searchButton.addEventListener('click', function () {
-    const query = searchInput.value.trim();
-    if (query) {
-        searchCharacters(query);
-    } else {
-        alert('Por favor, digite um nome para buscar.');
-    }
-});
+function normalizeFileName(name) {
+    return name
+        .trim()
+        .replace(/\s+/g, '_')
+        .replace(/[^a-zA-Z0-9_]/g, '')
+        .toLowerCase();
+}
 
 searchInput.addEventListener('input', function () {
     const query = searchInput.value.trim();
-    if (query.length > 0) {
-        searchCharacters(query);
-    } else {
-        characterList.innerHTML = '';
-    }
+    const filter = filterType.value;
+    searchCharacters(query, filter);
+});
+
+filterType.addEventListener('change', function () {
+    const query = searchInput.value.trim();
+    const filter = filterType.value;
+    searchCharacters(query, filter);
+});
+
+window.addEventListener('DOMContentLoaded', () => {
+    searchCharacters();
 });

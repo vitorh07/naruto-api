@@ -16,6 +16,36 @@
         <button id="searchButton">Buscar</button>
     </div>
 
+    <div id="filterContainer">
+        <select id="filterType">
+            <option value="">Todos</option>
+            <optgroup label="Estado">
+                <option value="vivo">Vivo</option>
+                <option value="nao_vivo">Não Vivo</option>
+            </optgroup>
+            <optgroup label="Gênero">
+                <option value="masculino">Masculino</option>
+                <option value="feminino">Feminino</option>
+            </optgroup>
+            <optgroup label="Patente">
+                <option value="genin">Genin</option>
+                <option value="jounin">Jounin</option>
+                <option value="sannin">Sannin</option>
+            </optgroup>
+            <optgroup label="Vila">
+                <option value="konohagakure">Konohagakure</option>
+                <option value="sunagakure">Sunagakure</option>
+                <option value="kirigakure">Kirigakure</option>
+                <option value="iwagakure">Iwagakure</option>
+                <option value="kumogakure">Kumogakure</option>
+                <option value="amegakure">Amegakure</option>
+            </optgroup>
+            <optgroup label="Afiliação">
+                <option value="akatsuki">Akatsuki</option>
+            </optgroup>
+        </select>
+    </div>
+
     <div id="characterList"></div>
 
     <script src="script.js"></script>

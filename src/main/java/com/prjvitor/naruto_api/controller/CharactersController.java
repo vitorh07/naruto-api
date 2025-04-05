@@ -37,7 +37,41 @@ public class CharactersController {
     }
 
     @GetMapping("/characters/search")
-    public List<Characters> searchCharacters(@RequestParam(required = false) String name) {
+    public List<Characters> searchCharacters(
+            @RequestParam(required = false) String name,
+            @RequestParam(required = false) String filter) {
+        if (filter != null && !filter.isEmpty()) {
+            filter = filter.toLowerCase().replace(" ", "_");
+            switch (filter) {
+                case "vivo":
+                    return charactersService.searchByEstadoAndName("Vivo", name);
+                case "nao_vivo":
+                    return charactersService.searchByEstadoAndName("Não Vivo", name);
+                case "masculino":
+                    return charactersService.searchByGeneroAndName("Masculino", name);
+                case "feminino":
+                    return charactersService.searchByGeneroAndName("Feminino", name);
+                case "genin":
+                case "jounin":
+                case "sannin":
+                    return charactersService.searchByPatenteAndName(filter, name);
+                case "konohagakure":
+                case "sunagakure":
+                case "kirigakure":
+                case "iwagakure":
+                case "kumogakure":
+                case "amegakure":
+                    return charactersService.searchByVillageAndName(filter, name);
+                case "akatsuki":
+                case "forcas_aliadas_shinobi":
+                case "monte_myouboku":
+                case "floresta_shikkotsu":
+                case "caverna_ryuuchi":
+                    return charactersService.searchByAffiliationAndName(filter, name);
+                default:
+                    break;
+            }
+        }
         if (name != null && !name.isEmpty()) {
             return charactersService.searchByName(name);
         }

@@ -29,4 +29,24 @@ public class CharactersService {
     public List<Characters> searchByName(String name) {
         return charactersRepository.findByNameContainingIgnoreCase(name);
     }
+
+    public List<Characters> searchByEstadoAndName(String estado, String name) {
+        return charactersRepository.findByEstadoIgnoreCaseAndNameContainingIgnoreCase(estado, name);
+    }
+    
+    public List<Characters> searchByGeneroAndName(String genero, String name) {
+        return charactersRepository.findByGeneroIgnoreCaseAndNameContainingIgnoreCase(genero, name);
+    }
+    
+    public List<Characters> searchByPatenteAndName(String patente, String name) {
+        return charactersRepository.findByPatenteIgnoreCaseAndNameContainingIgnoreCase(patente, name);
+    }
+
+    public List<Characters> searchByVillageAndName(String village, String name) {
+        return charactersRepository.findByVilaIgnoreCaseAndNameContainingIgnoreCase(village, name);
+    }
+    
+    public List<Characters> searchByAffiliationAndName(String affiliation, String name) {
+        return charactersRepository.findByAfiliacaoIgnoreCaseAndNameContainingIgnoreCase(affiliation, name);
+    }
 }
