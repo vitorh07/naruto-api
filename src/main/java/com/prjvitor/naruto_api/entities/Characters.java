@@ -23,8 +23,15 @@ public class Characters {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "nome")
+    @Column(name = "name")
     private String name;
-    
-    private String imagem_url;
+    private String genero;
+    private String estado;
+    private String ocupacao;
+    private String afiliacao;
+    private String aldeia;
+    private String vila;
+    private String kekkei_genkai;
+    private String diferencial;
+    private String patente;
 }
