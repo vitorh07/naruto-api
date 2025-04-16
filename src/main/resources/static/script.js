@@ -2,6 +2,9 @@ const searchInput = document.getElementById('searchInput');
 const filterType = document.getElementById('filterType');
 const characterList = document.getElementById('characterList');
 
+const modal = document.getElementById('characterModal');
+const closeModalButton = document.getElementById('closeModal');
+
 function searchCharacters(query = '', filter = '') {
     const encodedQuery = encodeURIComponent(query);
     const encodedFilter = encodeURIComponent(filter);
@@ -41,8 +44,14 @@ function searchCharacters(query = '', filter = '') {
                 const characterName = document.createElement('p');
                 characterName.textContent = character.name || 'Nome desconhecido';
 
+                const viewMoreBtn = document.createElement('button');
+                viewMoreBtn.textContent = 'Ver mais';
+                viewMoreBtn.classList.add('view-more');
+                viewMoreBtn.addEventListener('click', () => openModal(character));
+
                 listItem.appendChild(characterImage);
                 listItem.appendChild(characterName);
+                listItem.appendChild(viewMoreBtn);
                 characterList.appendChild(listItem);
             });
         })
@@ -59,6 +68,32 @@ function normalizeFileName(name) {
         .toLowerCase();
 }
 
+function openModal(character) {
+    document.getElementById('modalName').textContent = character.name || 'Nome desconhecido';
+    document.getElementById('modalImage').src = `imgs/${normalizeFileName(character.name)}.jpg`;
+    document.getElementById('modalVillage').textContent = `Vila: ${character.village || 'Desconhecida'}`;
+    document.getElementById('modalRank').textContent = `Patente: ${character.rank || 'Desconhecida'}`;
+    document.getElementById('modalStatus').textContent = `Estado: ${character.status || 'Desconhecido'}`;
+    document.getElementById('modalGender').textContent = `Gênero: ${character.gender || 'Desconhecido'}`;
+    document.getElementById('modalAffiliation').textContent = `Afiliação: ${character.affiliation || 'Nenhuma'}`;
+
+    document.getElementById('modalImage').onerror = () => {
+        document.getElementById('modalImage').src = 'imgs/placeholder.png';
+    };
+
+    modal.classList.remove('hidden');
+}
+
+closeModalButton.addEventListener('click', () => {
+    modal.classList.add('hidden');
+});
+
+window.addEventListener('click', (e) => {
+    if (e.target === modal) {
+        modal.classList.add('hidden');
+    }
+});
+
 searchInput.addEventListener('input', function () {
     const query = searchInput.value.trim();
     const filter = filterType.value;
@@ -74,3 +109,19 @@ filterType.addEventListener('change', function () {
 window.addEventListener('DOMContentLoaded', () => {
     searchCharacters();
 });
+
+function openModal(character) {
+    document.getElementById('modalName').textContent = character.name || 'Nome desconhecido';
+    document.getElementById('modalImage').src = `imgs/${normalizeFileName(character.name)}.jpg`;
+    document.getElementById('modalVillage').textContent = `Vila: ${character.vila || 'Desconhecida'}`;
+    document.getElementById('modalRank').textContent = `Patente: ${character.patente || 'Desconhecida'}`;
+    document.getElementById('modalStatus').textContent = `Estado: ${character.estado || 'Desconhecido'}`;
+    document.getElementById('modalGender').textContent = `Gênero: ${character.genero || 'Desconhecido'}`;
+    document.getElementById('modalAffiliation').textContent = `Afiliação: ${character.afiliacao || 'Nenhuma'}`;
+
+    document.getElementById('modalImage').onerror = () => {
+        document.getElementById('modalImage').src = 'imgs/placeholder.png';
+    };
+
+    modal.classList.remove('hidden');
+}
