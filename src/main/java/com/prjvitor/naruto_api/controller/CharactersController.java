@@ -45,8 +45,8 @@ public class CharactersController {
             switch (filter) {
                 case "vivo":
                     return charactersService.searchByEstadoAndName("Vivo", name);
-                case "nao_vivo":
-                    return charactersService.searchByEstadoAndName("Não Vivo", name);
+                case "morto":
+                    return charactersService.searchByEstadoAndName("Morto", name);
                 case "masculino":
                     return charactersService.searchByGeneroAndName("Masculino", name);
                 case "feminino":
