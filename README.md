@@ -28,7 +28,7 @@ Uma API desenvolvida para listar personagens do universo Naruto. Ideal para proj
 
 1. Clone o repositório:
 ```bash
-git clone https://github.com/seu-usuario/api-naruto.git
+git clone https://github.com/vitorh07/naruto-api.git
 ```
 2. Acesse o diretório do projeto:
 ```bash
